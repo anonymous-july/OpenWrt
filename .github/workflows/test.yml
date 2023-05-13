@@ -1,11 +1,11 @@
-name: Build lede
+name: test
 
 on:
   workflow_dispatch
 
 jobs:
-  build_lede:
-    name: Build lede firmware
+  test:
+    name: test
     runs-on: ubuntu-20.04
     steps:
 
