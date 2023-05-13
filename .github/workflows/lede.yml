@@ -32,11 +32,11 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-      - name: Generate configuration file
-        run: |
-          cd lede
-          wget https://raw.githubusercontent.com/anonymous-july/OpenWrt/main/lede-config -O .config
-          make defconfig
+      - name: Create configuration file for ssh
+        uses: P3TERX/ssh2actions@main
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
       - name: Make download
         run: |
