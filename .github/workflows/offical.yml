@@ -12,6 +12,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Start SSH via tmate
+        uses: P3TERX/ssh2actions@main
+        # Send connection info to Telegram (optional)
+        # You can find related documents here: https://core.telegram.org/bots
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
       - name: Initialization environment
         env:
           DEBIAN_FRONTEND: noninteractive
@@ -33,11 +41,19 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-      - name: Generate configuration file
-        run: |
-          cd openwrt
-          wget https://raw.githubusercontent.com/anonymous-july/OpenWrt/main/offical-config -O .config
-          make defconfig
+      - name: Start SSH via tmate
+        uses: P3TERX/ssh2actions@main
+        # Send connection info to Telegram (optional)
+        # You can find related documents here: https://core.telegram.org/bots
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+      # - name: Generate configuration file
+      #   run: |
+      #     cd openwrt
+      #     wget https://raw.githubusercontent.com/anonymous-july/OpenWrt/main/offical-config -O .config
+      #     make defconfig
 
       - name: Make download
         run: |
