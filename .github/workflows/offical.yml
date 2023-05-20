@@ -24,6 +24,8 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
+          sudo -E rm -f /etc/apt/sources.list.d/*
+          sudo -E cp sources.list /etc/apt/sources.list
           sudo -E apt clean all
           sudo -E apt update
           sudo -E apt full-upgrade -y
